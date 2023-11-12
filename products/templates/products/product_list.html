@@ -10,6 +10,7 @@
 <body>
     <header>
         <h1>Lista de Produtos</h1>
+        <a href="{% url 'view_cart' %}" class="btn btn-primary">Ver Carrinho</a>
     </header>
 
     <main>
@@ -21,10 +22,12 @@
                 <p>{{ product.description }}</p>
                 <p>Preço: R$ {{ product.price }}</p>
                 <p>Categoria: {{ product.category }}</p>
+                <a href="{% url 'add_to_cart' product.id %}">Add to Cart</a>
             </div>
             {% endfor %}
         </div>
     </main>
-    <script src="/static/bootstrap.bundle.min.js"></script>
+
+    <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

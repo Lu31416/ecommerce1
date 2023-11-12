@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seu Carrinho de Compras</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/view_cart.css' %}">
+</head>
+<body>
+    <div class="cart-container">
+        <h1>Seu Carrinho de Compras</h1>
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Preço</th>
+                    <th>Quantidade</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr class="cart-item">
+                    <td>{{ item.product.name }}</td>
+                    <td>R$ {{ item.product.price }}</td>
+                    <td class="quantity">
+                        <a href="{% url 'remove_from_cart' item.product.id %}" class="btn">-</a>
+                        {{ item.quantity }}
+                        <a href="{% url 'add_to_cart' item.product.id %}" class="btn">+</a>
+                    </td>
+                    <td>R$ {{ item.total_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div class="cart-actions">
+            <a href="{% url 'product_list' %}" class="btn btn-continue">Continuar Comprando</a>
+        </div>
+    </div>
+</body>
+</html>
