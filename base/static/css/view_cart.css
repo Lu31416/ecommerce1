@@ -66,3 +66,9 @@ th {
 .btn-continue:hover {
     background-color: #218838;
 }
+
+.cart-table td:nth-child(2),
+.cart-table td:nth-child(3),
+.cart-table td:nth-child(4) {
+    text-align: center;
+}

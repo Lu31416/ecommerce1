@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>Seu Carrinho de Compras</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/view_cart.css' %}">
+    <!-- Adicione a biblioteca do Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <div class="cart-container">
@@ -36,7 +38,27 @@
         
         <div class="cart-actions">
             <a href="{% url 'product_list' %}" class="btn btn-continue">Continuar Comprando</a>
+            <a href="#" class="btn btn-finalize" data-bs-toggle="modal" data-bs-target="#orderConfirmationModal">Finalizar Compra</a>
         </div>
     </div>
+
+    <!-- Modal de confirmação de pedido -->
+    <div class="modal" id="orderConfirmationModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Pedido Confirmado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Seu pedido foi confirmado com sucesso!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Adicione o JavaScript do Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

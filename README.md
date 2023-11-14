@@ -1,2 +1,5 @@
-# ecommerce1
+# Ecommerce
+
+# .\Scripts\activate
+# python manage.py runserver
  
