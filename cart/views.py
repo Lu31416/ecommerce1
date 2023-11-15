@@ -1,7 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Cart, CartItem
 from products.models import Product
-from .models import Cart, CartItem, Order
+from .models import Cart, CartItem, Order, OrderItem
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
+import uuid
+
 
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -39,29 +43,39 @@ def view_cart(request):
         cart = Cart.objects.get(id=cart_id)
         cart_items = CartItem.objects.filter(cart=cart)
         for item in cart_items:
-            item.total_price = item.product.price * item.quantity  # Calcula o preço total do item
+            item.total_price = item.product.price * item.quantity  
     else:
         cart_items = []
     
     return render(request, 'view_cart.html', {'cart_items': cart_items})
 
+@csrf_exempt
 def finalize_order(request):
-    cart_id = request.session.get('cart_id')
+    if request.method == 'POST':
+        cart_id = request.session.get('cart_id')
 
-    if cart_id:
-        cart = Cart.objects.get(id=cart_id)
-        new_order = Order.objects.create(total_amount=0)  # Crie a ordem sem um usuário
-        total_price = 0
+        if cart_id:
+            cart = Cart.objects.get(id=cart_id)
+            new_order = Order.objects.create(total_amount=0)
 
-        for item in cart.items.all():
-            total_price += 50
+            total_price = 0
 
-        new_order.total_amount = total_price
-        new_order.save()
+            for item in cart.items.all():
+                if hasattr(item, 'product') and hasattr(item.product, 'price'):
+                    total_price += item.product.price * item.quantity
+                    OrderItem.objects.create(order=new_order, product=item.product, quantity=item.quantity)
 
-        cart.items.clear()  # Limpe o carrinho após a ordem 
+            new_order.total_amount = total_price
+            new_order.order_number = str(uuid.uuid4())[:8]
+            new_order.save()
 
-        return render(request, 'order_confirmation.html', {'order': new_order})
+            cart.items.clear()
 
-    # Lógica adicional para lidar com o caso em que o carrinho não existe
-    return render(request, 'error_page.html', {'error_message': 'O carrinho está vazio ou não existe.'})
+            return JsonResponse({'order_number': new_order.order_number})
+        else:
+            return JsonResponse({'error': 'O carrinho está vazio ou não existe.'}, status=400)
+    else:
+        return JsonResponse({'error': 'Método não permitido'}, status=405)
+
+from django.views.decorators.csrf import csrf_exempt
+

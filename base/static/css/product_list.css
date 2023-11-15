@@ -1,4 +1,3 @@
-/* Estilo para a página de produtos */
 body {
     background-color: #f4f4f4;
     font-family: Arial, sans-serif;
@@ -53,7 +52,7 @@ header h1 {
     font-size: 1.2em;
 }
 
-/* Botão Ver Catálogo */
+
 .btn-primary {
     background-color: #007bff;
     color: #fff;

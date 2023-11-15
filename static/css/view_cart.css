@@ -1,33 +1,36 @@
 body {
+    background-color: #f4f4f4;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
 
 .cart-container {
-    max-width: 1200px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    font-size: 2em;
-    text-align: center; /* Para centralizar o título */
+    text-align: center;
+}
+
+.table-responsive {
+    overflow-x: auto;
 }
 
 .cart-table {
-    width: 80%; /* Tamanho da tabela */
-    margin: 0 auto; /* Centralizar a tabela */
-    border: 2px solid #ddd; /* Adiciona uma borda à tabela */
+    width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
 
 th, td {
     border: 1px solid #ddd;
-    padding: 10px; /* Aumenta o preenchimento para melhor espaçamento */
-    text-align: left;
+    padding: 10px;
+    text-align: center;
 }
 
 th {
@@ -41,28 +44,33 @@ th {
     margin-bottom: 10px;
 }
 
-.quantity {
-    margin: 0 10px;
+.quantity-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.btn {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
+.btn-finalize, .btn-continue {
+    padding: 10px 20px;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
+    color: #fff;
 }
 
-.btn:hover {
-    background-color: #0056b3;
+.btn-finalize {
+    background-color: #007bff !important;
+}
+
+.btn-finalize:hover {
+    background-color: #0056b3 !important;
 }
 
 .btn-continue {
-    background-color: #28a745;
+    background-color: #28a745 !important;
 }
 
 .btn-continue:hover {
-    background-color: #218838;
+    background-color: #218838 !important;
 }
