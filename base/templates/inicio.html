@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>E-commerce</title>
+    <link href="/static/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <header class="py-3">
+        <h1 class="text-center">E-commerce</h1>
+      </header>
+
+      <main>
+        {% block principal %}
+        <h2 class="text-center">Bem-vindo à nossa loja online</h2>
+        <p class="text-center">Encontre os melhores produtos em nosso catálogo!</p>
+
+        <div class="text-center">
+          <a href="/products" class="btn btn-primary btn-lg">Ver Catálogo</a>
+        </div>
+        {% endblock %}
+      </main>
+      <footer class="py-3 text-center">
+        &copy; 2023 E-commerce - LT
+      </footer>
+    </div>
+
+    <script src="/static/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
+
